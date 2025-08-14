@@ -7,7 +7,7 @@ import (
 	"fmt"
 )
 
-type Storer interface {
+type storer interface {
 	// Create a new Flipper with a status
 	Create(key string, enabled bool) error
 	// Read returns the current status of a Flipper
@@ -23,10 +23,10 @@ type ExecutionFn = func() error
 
 // FeatureFlipper executes a function if it is enabled in the flipper
 type FeatureFlipper struct {
-	store Storer
+	store storer
 }
 
-func NewFeatureFlipper(store Storer) *FeatureFlipper {
+func NewFeatureFlipper(store storer) *FeatureFlipper {
 	return &FeatureFlipper{
 		store: store,
 	}
