@@ -1,4 +1,4 @@
-module github.com/egreerdp/feature-flipper
+module github.com/egreerdp/FeatureFlipper
 
 go 1.24.3
 

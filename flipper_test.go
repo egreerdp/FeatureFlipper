@@ -4,8 +4,8 @@ import (
 	"errors"
 	"testing"
 
-	featureflipper "github.com/egreerdp/feature-flipper"
-	flipperClient "github.com/egreerdp/feature-flipper/client"
+	featureflipper "github.com/egreerdp/FeatureFlipper"
+	flipperClient "github.com/egreerdp/FeatureFlipper/client"
 
 	"github.com/dailypay/daily-go/pkg/ctxlogger"
 	"github.com/stretchr/testify/suite"
