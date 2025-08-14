@@ -1,0 +1,4 @@
+[tasks]
+[tasks.test]
+description = "run tests"
+run = "docker compose down -v; docker compose up --build -d; go test -v ./..."

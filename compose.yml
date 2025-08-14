@@ -1,0 +1,15 @@
+services:
+  postgresdb:
+    container_name: postgresdb
+    image: artifactory.dailypay.com/docker/postgres:16.4-alpine
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: root
+    volumes:
+      - postgresdb_data_container:/var/lib/postgresql/data
+    ports: # Avoid port conflict for local development
+      - "${POSTGRESDB_PORT:-5400}:5432"
+
+volumes:
+  postgresdb_data_container:
