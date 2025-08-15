@@ -1,3 +1,9 @@
+## v0.4.0 (2025-08-15)
+
+### Feat
+
+- remove run on disabled
+
 ## v0.3.0 (2025-08-15)
 
 ### Feat
