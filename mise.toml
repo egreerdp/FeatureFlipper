@@ -2,3 +2,7 @@
 [tasks.test]
 description = "run tests"
 run = "docker compose down -v; docker compose up --build -d; go test -v ./..."
+
+[tasks.release]
+description = "create a version bump and release"
+run = "cz bump; git push; git push --tags; gh release create;"
