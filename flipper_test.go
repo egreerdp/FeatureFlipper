@@ -106,22 +106,6 @@ func (su *FlipperTestSuite) TestFeatureFlipper_RunEnabled_NotRun() {
 	su.ErrorContains(err, "flipper disabled for key: my-feature")
 }
 
-func (su *FlipperTestSuite) TestFeatureFlipper_RunDisabled() {
-	err := su.ff.Create("my-feature", false)
-	su.NoError(err)
-
-	err = su.ff.RunDisabled("my-feature", func() error { return errors.New("I ran") })
-	su.ErrorContains(err, "I ran")
-}
-
-func (su *FlipperTestSuite) TestFeatureFlipper_RunDisabled_DoesNotRunWhenEnabled() {
-	err := su.ff.Create("my-feature", true)
-	su.NoError(err)
-
-	err = su.ff.RunDisabled("my-feature", func() error { return errors.New("I ran") })
-	su.ErrorContains(err, "flipper disabled for key: my-feature")
-}
-
 func (su *FlipperTestSuite) TestFeatureFlipper_Enabled_NoErrorWithKeyNotFound() {
 	err := su.ff.Run("my-feature", func() error { return errors.New("I ran") })
 	su.ErrorContains(err, "flipper disabled for key: my-feature")

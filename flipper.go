@@ -50,14 +50,10 @@ func (f FeatureFlipper) Enabled(key string) (bool, error) {
 
 // Run executes fn if key is enabled in the FlipperStore
 func (f FeatureFlipper) Run(key string, fn ExecutionFn) error {
-	return f.run(key, fn, true)
+	return f.run(key, fn)
 }
 
-func (f FeatureFlipper) RunDisabled(key string, fn ExecutionFn) error {
-	return f.run(key, fn, false)
-}
-
-func (f FeatureFlipper) run(key string, fn ExecutionFn, runWhenEnabled bool) error {
+func (f FeatureFlipper) run(key string, fn ExecutionFn) error {
 	if key == "" {
 		return errors.New("key cannot be empty")
 	}
@@ -67,9 +63,9 @@ func (f FeatureFlipper) run(key string, fn ExecutionFn, runWhenEnabled bool) err
 		return err
 	}
 
-	if enabled == runWhenEnabled {
-		return fn()
+	if !enabled {
+		return fmt.Errorf("flipper disabled for key: %s", key)
 	}
 
-	return fmt.Errorf("flipper disabled for key: %s", key)
+	return fn()
 }
