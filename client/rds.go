@@ -19,7 +19,7 @@ func (r DB) Create(key string, enabled bool) error {
 		Enabled: enabled,
 	}
 
-	err := r.db.Save(&value).Error
+	err := r.db.Create(&value).Error
 	if err != nil {
 		return err
 	}
@@ -31,7 +31,7 @@ func (r DB) Create(key string, enabled bool) error {
 func (r DB) Read(key string) (bool, error) {
 	var value FeatureFlag
 	err := r.db.First(&value, "key=?", key).Error
-	if err != nil {
+	if err != nil && err != gorm.ErrRecordNotFound {
 		return false, err
 	}
 
@@ -42,7 +42,7 @@ func (r DB) Read(key string) (bool, error) {
 func (r DB) Update(key string, enabled bool) error {
 	var value FeatureFlag
 	err := r.db.First(&value, "key=?", key).Error
-	if err != nil {
+	if err != nil && err != gorm.ErrRecordNotFound {
 		return err
 	}
 	value.Enabled = enabled
